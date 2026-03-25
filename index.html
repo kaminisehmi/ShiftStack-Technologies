@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShiftStack — AI Transformation & Workforce Evolution</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a0b0f;
+  --bg-card: #111318;
+  --bg-card-hover: #181b22;
+  --accent: #00e5a0;
+  --accent-dim: #00e5a033;
+  --accent-glow: #00e5a066;
+  --secondary: #6366f1;
+  --secondary-dim: #6366f122;
+  --text-primary: #f0f1f5;
+  --text-secondary: #8b8fa3;
+  --text-muted: #555970;
+  --border: #1e2130;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===================== GRID NOISE OVERLAY ===================== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 20%, var(--accent-dim) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, var(--secondary-dim) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===================== NAV ===================== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.25rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(20px);
+  background: rgba(10, 11, 15, 0.8);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--accent), var(--secondary));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--bg-deep);
+  position: relative;
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.logo-text span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.3s;
+  letter-spacing: 0.02em;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+.nav-cta {
+  padding: 0.65rem 1.5rem;
+  background: var(--accent);
+  color: var(--bg-deep);
+  border: none;
+  border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.nav-cta:hover {
+  box-shadow: 0 0 30px var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+/* ===================== HERO ===================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 3rem 4rem;
+  z-index: 1;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.3;
+  mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 70%);
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--accent-dim);
+  border: 1px solid rgba(0, 229, 160, 0.2);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 2rem;
+  font-family: 'JetBrains Mono', monospace;
+  animation: fadeInUp 0.8s ease both;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 6.5vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.8s ease 0.1s both;
+}
+
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent), #00b4d8, var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+.btn-primary {
+  padding: 1rem 2.5rem;
+  background: var(--accent);
+  color: var(--bg-deep);
+  border: none;
+  border-radius: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 40px var(--accent-glow);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  padding: 1rem 2.5rem;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* ===================== STATS BAR ===================== */
+.stats-bar {
+  display: flex;
+  gap: 3rem;
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--border);
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.stat {
+  text-align: left;
+}
+
+.stat-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ===================== SECTION COMMON ===================== */
+section {
+  position: relative;
+  z-index: 1;
+  padding: 6rem 3rem;
+}
+
+.section-header {
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+}
+
+.section-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 550px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ===================== PROBLEM SECTION ===================== */
+.problem-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.problem-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.problem-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--danger), var(--warning));
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.problem-card:hover::before { opacity: 1; }
+.problem-card:hover { border-color: rgba(239, 68, 68, 0.3); background: var(--bg-card-hover); }
+
+.problem-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(239, 68, 68, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.problem-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.problem-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* ===================== SERVICES ===================== */
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  right: -80px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.service-card:hover::after { opacity: 1; }
+.service-card:hover { border-color: rgba(0, 229, 160, 0.3); transform: translateY(-4px); }
+
+.service-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.1em;
+}
+
+.service-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.service-card p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.service-tag {
+  padding: 0.35rem 0.85rem;
+  background: rgba(0, 229, 160, 0.08);
+  border: 1px solid rgba(0, 229, 160, 0.15);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent);
+}
+
+/* featured card spans full width */
+.service-card.featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  background: linear-gradient(135deg, var(--bg-card), #121825);
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+.service-card.featured:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.featured-visual {
+  position: relative;
+  height: 280px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+}
+
+.stack-diagram {
+  padding: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.stack-layer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.4s;
+}
+
+.stack-layer.old {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  color: var(--text-secondary);
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.stack-layer.new {
+  background: rgba(0, 229, 160, 0.08);
+  border: 1px solid rgba(0, 229, 160, 0.15);
+  color: var(--accent);
+}
+
+.stack-arrow {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+}
+
+/* ===================== PROCESS ===================== */
+.process-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+  opacity: 0.3;
+}
+
+.process-step {
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.step-dot {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--accent);
+  position: relative;
+  z-index: 2;
+  transition: all 0.4s;
+}
+
+.process-step:hover .step-dot {
+  border-color: var(--accent);
+  box-shadow: 0 0 30px var(--accent-dim);
+}
+
+.process-step h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.process-step p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ===================== WORKFORCE SECTION ===================== */
+.workforce {
+  background: linear-gradient(180deg, var(--bg-deep) 0%, #0d0f18 50%, var(--bg-deep) 100%);
+}
+
+.workforce-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.workforce-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.wf-feature {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: all 0.4s;
+}
+
+.wf-feature:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: translateX(8px);
+}
+
+.wf-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--secondary-dim);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.wf-feature h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.wf-feature p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.workforce-visual {
+  position: relative;
+}
+
+.skill-meter {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.skill-meter h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+}
+
+.skill-row {
+  margin-bottom: 1.25rem;
+}
+
+.skill-row:last-child { margin-bottom: 0; }
+
+.skill-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.skill-label span:last-child {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
+.skill-bar-bg {
+  height: 8px;
+  background: var(--border);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+  transition: width 1.5s ease;
+}
+
+/* ===================== INDUSTRIES ===================== */
+.industries-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.industry-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.industry-pill {
+  padding: 0.85rem 1.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.3s;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.industry-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+  transform: translateY(-2px);
+}
+
+/* ===================== CTA ===================== */
+.cta-section {
+  padding: 8rem 3rem;
+}
+
+.cta-box {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 5rem 3rem;
+  background: linear-gradient(135deg, #111827, #0d1225);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-box::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.cta-box::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 200px;
+  background: radial-gradient(ellipse, var(--accent-dim), transparent 70%);
+}
+
+.cta-box h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.03em;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-box p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-box .btn-primary {
+  position: relative;
+  z-index: 1;
+  padding: 1.15rem 3rem;
+  font-size: 1.05rem;
+}
+
+/* ===================== FOOTER ===================== */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 3rem;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: var(--accent); }
+
+.footer-location {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ===================== ANIMATIONS ===================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card.featured { grid-template-columns: 1fr; }
+  .featured-visual { height: 220px; }
+  .process-steps { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .process-steps::before { display: none; }
+  .workforce-grid { grid-template-columns: 1fr; }
+  .problem-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  section { padding: 4rem 1.5rem; }
+  .hero { padding: 7rem 1.5rem 3rem; }
+  .hero h1 { font-size: 2.5rem; }
+  .stats-bar { flex-wrap: wrap; gap: 2rem; }
+  .problem-grid { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: 1fr; }
+  .cta-box { padding: 3rem 1.5rem; }
+  .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
+  .footer-left { flex-direction: column; }
+  .hero-buttons { flex-direction: column; }
+  .industry-pills { justify-content: center; }
+}
+
+/* ===================== HAMBURGER (MOBILE) ===================== */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn { display: block; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">S</div>
+    <div class="logo-text">Shift<span>Stack</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#problems">Why Now</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#workforce">Workforce</a></li>
+    <li><a href="#industries">Industries</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book a Discovery Call</a>
+  <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">AI Transformation Partner — Canada</div>
+    <h1>
+      Shift your stack.<br>
+      <span class="gradient-text">Elevate your people.</span>
+    </h1>
+    <p class="hero-sub">
+      We help organizations migrate from legacy technology to modern AI‑powered systems — and ensure every employee makes the transition with confidence.
+    </p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Start Your Transformation →</a>
+      <a href="#services" class="btn-secondary">Explore Services</a>
+    </div>
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-number">73%</div>
+        <div class="stat-label">of enterprises struggle with AI adoption</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">4.4T</div>
+        <div class="stat-label">annual productivity gains expected by 2030</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">85%</div>
+        <div class="stat-label">of jobs will be transformed by AI by 2030</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMS -->
+<section id="problems">
+  <div class="section-header">
+    <div class="section-tag">// The Challenge</div>
+    <h2 class="section-title">Legacy tech is holding<br>your business back</h2>
+    <p class="section-desc">Most organizations know they need to adopt AI. The question isn't "if" — it's "how" without disrupting operations or leaving your team behind.</p>
+  </div>
+  <div class="problem-grid">
+    <div class="problem-card animate-in">
+      <div class="problem-icon">⚡</div>
+      <h3>Outdated Infrastructure</h3>
+      <p>Legacy systems create bottlenecks, limit scalability, and make AI integration nearly impossible without a full rewrite.</p>
+    </div>
+    <div class="problem-card animate-in">
+      <div class="problem-icon">👥</div>
+      <h3>Skills Gap Crisis</h3>
+      <p>Your team built their expertise on yesterday's tools. Without reskilling, your best people become your biggest risk.</p>
+    </div>
+    <div class="problem-card animate-in">
+      <div class="problem-icon">🔄</div>
+      <h3>Failed Transformations</h3>
+      <p>70% of digital transformations fail. Most focus on tools and ignore the human side — change management, adoption, and culture.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header">
+    <div class="section-tag">// What We Do</div>
+    <h2 class="section-title">Two pillars of<br>transformation</h2>
+    <p class="section-desc">We operate at the intersection of technology modernization and human capital — because one without the other doesn't work.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card animate-in">
+      <div class="service-number">PILLAR 01</div>
+      <h3>Technology Shift</h3>
+      <p>Migrate your infrastructure from legacy systems to modern, AI‑ready architectures. We assess, plan, and execute — with zero business disruption.</p>
+      <div class="service-tags">
+        <span class="service-tag">Cloud Migration</span>
+        <span class="service-tag">AI Integration</span>
+        <span class="service-tag">API Modernization</span>
+        <span class="service-tag">Data Pipeline</span>
+      </div>
+    </div>
+    <div class="service-card animate-in">
+      <div class="service-number">PILLAR 02</div>
+      <h3>People Shift</h3>
+      <p>Upskill your workforce with structured AI literacy programs, role-specific training, and change management that sticks.</p>
+      <div class="service-tags">
+        <span class="service-tag">AI Academy</span>
+        <span class="service-tag">Role Mapping</span>
+        <span class="service-tag">Change Mgmt</span>
+        <span class="service-tag">Adoption KPIs</span>
+      </div>
+    </div>
+    <div class="service-card featured animate-in">
+      <div>
+        <div class="service-number">THE FULL STACK</div>
+        <h3>End‑to‑End Transformation</h3>
+        <p>Our signature engagement combines both pillars into a single, integrated roadmap. Technology and people evolve together — from legacy monolith to AI‑native, from resistant to resilient.</p>
+        <div class="service-tags">
+          <span class="service-tag">Agentic AI</span>
+          <span class="service-tag">GenAI Workflows</span>
+          <span class="service-tag">Workforce Analytics</span>
+          <span class="service-tag">CoE Setup</span>
+          <span class="service-tag">ROI Tracking</span>
+        </div>
+      </div>
+      <div class="featured-visual">
+        <div class="stack-diagram">
+          <div class="stack-layer old">❌ Legacy Monolith</div>
+          <div class="stack-layer old">❌ Manual Processes</div>
+          <div class="stack-layer old">❌ Siloed Data</div>
+          <div class="stack-arrow">⬇ ShiftStack ⬇</div>
+          <div class="stack-layer new">✓ AI-Native Microservices</div>
+          <div class="stack-layer new">✓ Agentic Automation</div>
+          <div class="stack-layer new">✓ Unified Data Mesh</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-header">
+    <div class="section-tag">// How We Work</div>
+    <h2 class="section-title">From assessment<br>to adoption</h2>
+    <p class="section-desc">A structured, phased approach designed to minimize risk and maximize speed-to-value.</p>
+  </div>
+  <div class="process-container">
+    <div class="process-steps">
+      <div class="process-step animate-in">
+        <div class="step-dot">01</div>
+        <h3>Discover</h3>
+        <p>Deep audit of your tech stack, data maturity, and workforce readiness. We map the gap between where you are and where AI can take you.</p>
+      </div>
+      <div class="process-step animate-in">
+        <div class="step-dot">02</div>
+        <h3>Design</h3>
+        <p>A dual roadmap: technology migration plan and workforce transition program, aligned to your business goals and timelines.</p>
+      </div>
+      <div class="process-step animate-in">
+        <div class="step-dot">03</div>
+        <h3>Deliver</h3>
+        <p>Phased execution with quick wins in the first 4–6 weeks. AI sprints for technology, training cohorts for people — running in parallel.</p>
+      </div>
+      <div class="process-step animate-in">
+        <div class="step-dot">04</div>
+        <h3>Sustain</h3>
+        <p>Ongoing optimization, AI Center of Excellence setup, and continuous learning programs to ensure your transformation is permanent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKFORCE TRANSITION -->
+<section id="workforce" class="workforce">
+  <div class="section-header">
+    <div class="section-tag">// People First</div>
+    <h2 class="section-title">Your people are your<br>competitive advantage</h2>
+    <p class="section-desc">AI doesn't replace your team — it amplifies them. We make sure every employee has the skills, confidence, and tools to thrive.</p>
+  </div>
+  <div class="workforce-grid">
+    <div class="workforce-features">
+      <div class="wf-feature animate-in">
+        <div class="wf-icon">🎓</div>
+        <div>
+          <h4>AI Literacy Programs</h4>
+          <p>From executive briefings to hands‑on workshops, we customize training to every level of your organization.</p>
+        </div>
+      </div>
+      <div class="wf-feature animate-in">
+        <div class="wf-icon">🗺️</div>
+        <div>
+          <h4>Role Evolution Mapping</h4>
+          <p>Every role gets a clear "before/after" view — which tasks AI handles, which become more strategic, and what new skills are needed.</p>
+        </div>
+      </div>
+      <div class="wf-feature animate-in">
+        <div class="wf-icon">📊</div>
+        <div>
+          <h4>Adoption Analytics</h4>
+          <p>Real-time dashboards tracking tool adoption, skill progression, and productivity gains across your workforce.</p>
+        </div>
+      </div>
+      <div class="wf-feature animate-in">
+        <div class="wf-icon">🛡️</div>
+        <div>
+          <h4>Change Champions Program</h4>
+          <p>We train internal advocates within each department to drive peer adoption and sustain momentum long after we leave.</p>
+        </div>
+      </div>
+    </div>
+    <div class="workforce-visual animate-in">
+      <div class="skill-meter">
+        <h4>Workforce AI Readiness — Before & After ShiftStack</h4>
+        <div class="skill-row">
+          <div class="skill-label"><span>AI Tool Proficiency</span><span>12% → 89%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 89%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span>Prompt Engineering</span><span>5% → 76%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 76%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span>Data Literacy</span><span>28% → 82%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 82%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span>Automation Design</span><span>8% → 71%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 71%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span>AI Ethics & Governance</span><span>15% → 85%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries">
+  <div class="section-header">
+    <div class="section-tag">// Industries</div>
+    <h2 class="section-title">Built for complexity,<br>tuned for your sector</h2>
+    <p class="section-desc">We bring cross-industry AI transformation expertise with deep vertical understanding.</p>
+  </div>
+  <div class="industries-wrap">
+    <div class="industry-pills">
+      <div class="industry-pill animate-in">🏦 Financial Services</div>
+      <div class="industry-pill animate-in">🏥 Healthcare</div>
+      <div class="industry-pill animate-in">🛢️ Energy & Utilities</div>
+      <div class="industry-pill animate-in">🏭 Manufacturing</div>
+      <div class="industry-pill animate-in">🛒 Retail & E‑Commerce</div>
+      <div class="industry-pill animate-in">🏛️ Government & Public Sector</div>
+      <div class="industry-pill animate-in">🚚 Supply Chain & Logistics</div>
+      <div class="industry-pill animate-in">📡 Telecom</div>
+      <div class="industry-pill animate-in">🎓 Education</div>
+      <div class="industry-pill animate-in">⚖️ Legal & Professional Services</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-box animate-in">
+    <h2>Ready to <span class="gradient-text">shift your stack</span>?</h2>
+    <p>Book a free 30-minute discovery call. We'll assess your AI readiness and outline a transformation path — no obligations.</p>
+    <a href="/cdn-cgi/l/email-protection#80e8e5ececefc0f3e8e9e6f4f3f4e1e3ebaee3e1" class="btn-primary">Book Your Free Discovery Call →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <a href="#" class="logo">
+        <div class="logo-icon">S</div>
+        <div class="logo-text">Shift<span>Stack</span></div>
+      </a>
+      <span class="footer-copy">© 2026 ShiftStack. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="/cdn-cgi/l/email-protection#036b666f6f6c43706b6a657770776260682d6062">Contact</a>
+    </div>
+    <div class="footer-location">📍 Canada</div>
+  </div>
+</footer>
+
+<!-- SCROLL ANIMATIONS -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, 
