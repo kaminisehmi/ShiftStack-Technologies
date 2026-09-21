@@ -769,6 +769,73 @@ section {
   transform: translateY(-2px);
 }
 
+/* ===================== ABOUT ===================== */
+.about-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.founder-card {
+  background: linear-gradient(135deg, var(--bg-card), #121825);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 20px;
+  padding: 2.5rem;
+}
+
+.founder-top {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.founder-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--bg-deep);
+  flex-shrink: 0;
+}
+
+.founder-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.founder-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--accent);
+  margin-top: 0.25rem;
+}
+
+.founder-card p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.founder-card .service-tags { margin-top: 1.5rem; }
+
+.values-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 /* ===================== FAQ ===================== */
 .faq-wrap {
   max-width: 1200px;
@@ -955,6 +1022,7 @@ footer {
   .process-steps { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
   .process-steps::before { display: none; }
   .workforce-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
   .problem-grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -1023,6 +1091,7 @@ footer {
     <li><a href="#process">Process</a></li>
     <li><a href="#workforce">Workforce</a></li>
     <li><a href="#industries">Industries</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li class="nav-contact-mobile"><a href="#contact">Contact</a></li>
   </ul>
@@ -1266,6 +1335,65 @@ footer {
       <div class="industry-pill animate-in">📡 Telecom</div>
       <div class="industry-pill animate-in">🎓 Education</div>
       <div class="industry-pill animate-in">⚖️ Legal & Professional Services</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <div class="section-tag">// About Us</div>
+    <h2 class="section-title">Built by people who<br>teach AI, not just sell it</h2>
+    <p class="section-desc">ShiftStack Technologies is an Alberta corporation based in Calgary. We started it because we kept seeing the same pattern: companies buy AI tools, but their people are never shown how to use them well.</p>
+  </div>
+  <div class="about-grid">
+    <div class="founder-card animate-in">
+      <div class="founder-top">
+        <div class="founder-avatar">KS</div>
+        <div>
+          <h3>Kamini Sehmi</h3>
+          <div class="founder-role">Founder &amp; CEO</div>
+        </div>
+      </div>
+      <p>Kamini is an AI and machine learning practitioner with more than 15 years across applied AI research, software development, and teaching. Before founding ShiftStack she was an Instructor and Subject Matter Expert in AI &amp; Software Development at SAIT in Calgary, teaching the skills our People Shift programs are built on.</p>
+      <p>Her research in deep learning, NLP, and explainable AI has been published in journals including <em>Scientific Reports</em> and <em>Archives of Computational Methods in Engineering</em>. She also works on healthcare data security and responsible AI.</p>
+      <div class="service-tags">
+        <span class="service-tag">Applied ML</span>
+        <span class="service-tag">LLMs &amp; NLP</span>
+        <span class="service-tag">Explainable AI</span>
+        <span class="service-tag">AWS Certified</span>
+        <span class="service-tag">AI Education</span>
+      </div>
+    </div>
+    <div class="values-list">
+      <div class="wf-feature animate-in">
+        <div class="wf-icon">🧭</div>
+        <div>
+          <h4>Teach, then build</h4>
+          <p>Years in the classroom taught us that adoption depends on understanding. Every system we deliver comes with the training to run it.</p>
+        </div>
+      </div>
+      <div class="wf-feature animate-in">
+        <div class="wf-icon">🔬</div>
+        <div>
+          <h4>Evidence over hype</h4>
+          <p>We bring a researcher's rigour: we test what works for your data and your people before it goes into production.</p>
+        </div>
+      </div>
+      <div class="wf-feature animate-in">
+        <div class="wf-icon">🔒</div>
+        <div>
+          <h4>Responsible by design</h4>
+          <p>Privacy, fairness, and governance are part of the architecture from day one, not added at the end.</p>
+        </div>
+      </div>
+      <div class="wf-feature animate-in">
+        <div class="wf-icon">🍁</div>
+        <div>
+          <h4>Proudly Albertan</h4>
+          <p>Calgary-based and Alberta-incorporated, serving organizations across Canada.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
