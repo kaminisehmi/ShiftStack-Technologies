@@ -769,6 +769,70 @@ section {
   transform: translateY(-2px);
 }
 
+/* ===================== ENGAGEMENTS ===================== */
+.package-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.package-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.75rem;
+  transition: border-color 0.4s, transform 0.4s;
+}
+
+.package-card:hover { border-color: rgba(0, 229, 160, 0.3); transform: translateY(-4px); }
+
+.package-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.package-head .service-number { margin-bottom: 0; }
+
+.package-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+}
+
+.package-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.6rem; }
+
+.package-card p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.package-card ul, .plain-list { list-style: none; }
+
+.package-card li, .plain-list li {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding-left: 1.3rem;
+  position: relative;
+  margin-bottom: 0.55rem;
+}
+
+.package-card li::before, .plain-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
 /* ===================== ABOUT ===================== */
 .about-grid {
   max-width: 1200px;
@@ -830,6 +894,42 @@ section {
 
 .founder-card .service-tags { margin-top: 1.5rem; }
 
+.founder-block {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.founder-block h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.timeline { list-style: none; }
+
+.timeline li {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.timeline span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  padding-top: 0.15rem;
+}
+
+.timeline strong { color: var(--text-primary); font-weight: 600; }
+
 .values-list {
   display: flex;
   flex-direction: column;
@@ -882,6 +982,85 @@ section {
   line-height: 1.7;
   max-width: 800px;
 }
+
+/* ===================== CONTACT ===================== */
+.contact-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.contact-info { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.contact-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.1rem 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.3s;
+}
+
+a.contact-row:hover { border-color: var(--accent); }
+
+.contact-icon { font-size: 1.2rem; }
+
+.contact-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.contact-value { font-size: 0.95rem; margin-top: 0.15rem; }
+
+.contact-form {
+  background: linear-gradient(135deg, #111827, #0d1225);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.contact-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.contact-form input, .contact-form select, .contact-form textarea {
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  resize: vertical;
+}
+
+.contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.contact-form .btn-primary { justify-content: center; }
+
+.form-note { font-size: 0.75rem; color: var(--text-muted); }
 
 /* ===================== CTA ===================== */
 .cta-section {
@@ -1023,6 +1202,8 @@ footer {
   .process-steps::before { display: none; }
   .workforce-grid { grid-template-columns: 1fr; }
   .about-grid { grid-template-columns: 1fr; }
+  .package-grid { grid-template-columns: 1fr 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
   .problem-grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -1036,6 +1217,10 @@ footer {
   .problem-grid { grid-template-columns: 1fr; }
   .process-steps { grid-template-columns: 1fr; }
   .cta-box { padding: 3rem 1.5rem; }
+  .package-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .timeline li { grid-template-columns: 1fr; gap: 0.2rem; }
+  .founder-card, .contact-form { padding: 1.5rem; }
   .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
   .footer-left { flex-direction: column; }
   .hero-buttons { flex-direction: column; }
@@ -1088,8 +1273,8 @@ footer {
   <ul class="nav-links">
     <li><a href="#problems">Why Now</a></li>
     <li><a href="#services">Services</a></li>
+    <li><a href="#engagements">Offers</a></li>
     <li><a href="#process">Process</a></li>
-    <li><a href="#workforce">Workforce</a></li>
     <li><a href="#industries">Industries</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#faq">FAQ</a></li>
@@ -1212,6 +1397,77 @@ footer {
           <div class="stack-layer new">✓ Unified Data Mesh</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENTS -->
+<section id="engagements">
+  <div class="section-header">
+    <div class="section-tag">// Ways to Work With Us</div>
+    <h2 class="section-title">Start small or<br>go all in</h2>
+    <p class="section-desc">Every offer can stand alone or lead into the next. Timelines are typical and are scoped to your organization during the discovery call.</p>
+  </div>
+  <div class="package-grid">
+    <div class="package-card animate-in">
+      <div class="package-head">
+        <span class="service-number">OFFER 01</span>
+        <span class="package-time">2–3 weeks</span>
+      </div>
+      <h3>AI Readiness Assessment</h3>
+      <p>Find out where AI will pay off and what's standing in the way.</p>
+      <ul>
+        <li>Tech stack and data maturity audit</li>
+        <li>Workforce AI-readiness survey and interviews</li>
+        <li>Prioritized list of AI use cases with rough ROI</li>
+        <li>Risk, privacy and governance review</li>
+        <li>Written roadmap and executive briefing</li>
+      </ul>
+    </div>
+    <div class="package-card animate-in">
+      <div class="package-head">
+        <span class="service-number">OFFER 02</span>
+        <span class="package-time">6–8 weeks</span>
+      </div>
+      <h3>AI Pilot Sprint</h3>
+      <p>Prove value with one working AI solution before scaling up.</p>
+      <ul>
+        <li>One high-value use case, chosen together</li>
+        <li>Working prototype on your real data</li>
+        <li>Integration with existing systems</li>
+        <li>User testing with a pilot team</li>
+        <li>Results report and scale-up plan</li>
+      </ul>
+    </div>
+    <div class="package-card animate-in">
+      <div class="package-head">
+        <span class="service-number">OFFER 03</span>
+        <span class="package-time">4–12 weeks</span>
+      </div>
+      <h3>AI Academy</h3>
+      <p>Give your people the skills and confidence to use AI every day.</p>
+      <ul>
+        <li>Executive AI briefing</li>
+        <li>Role-specific hands-on workshops</li>
+        <li>Prompting and AI-assisted workflows</li>
+        <li>AI ethics, privacy and safe use</li>
+        <li>Change-champion training and adoption tracking</li>
+      </ul>
+    </div>
+    <div class="package-card animate-in">
+      <div class="package-head">
+        <span class="service-number">OFFER 04</span>
+        <span class="package-time">6–12 months</span>
+      </div>
+      <h3>End-to-End Transformation</h3>
+      <p>Modernize technology and reskill your workforce in one plan.</p>
+      <ul>
+        <li>Everything in the three offers above</li>
+        <li>Phased legacy-to-cloud and AI migration</li>
+        <li>Agentic and GenAI workflow automation</li>
+        <li>AI Center of Excellence setup</li>
+        <li>Quarterly ROI and adoption reporting</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -1357,6 +1613,36 @@ footer {
       </div>
       <p>Kamini is an AI and machine learning practitioner with more than 15 years across applied AI research, software development, and teaching. Before founding ShiftStack she was an Instructor and Subject Matter Expert in AI &amp; Software Development at SAIT in Calgary, teaching the skills our People Shift programs are built on.</p>
       <p>Her research in deep learning, NLP, and explainable AI has been published in journals including <em>Scientific Reports</em> and <em>Archives of Computational Methods in Engineering</em>. She also works on healthcare data security and responsible AI.</p>
+
+      <div class="founder-block">
+        <h4>Experience</h4>
+        <ul class="timeline">
+          <li><span>2025 – now</span><div><strong>Founder &amp; CEO</strong> · ShiftStack Technologies, Calgary</div></li>
+          <li><span>2023 – 2025</span><div><strong>Instructor &amp; Subject Matter Expert, AI &amp; Software Development</strong> · SAIT, Calgary</div></li>
+          <li><span>2016 – 2022</span><div><strong>Researcher &amp; Developer, Applied AI &amp; Data</strong> · CGC Landran, India</div></li>
+          <li><span>2009 – 2014</span><div><strong>Research Assistant</strong> · Lovely Professional University, India</div></li>
+        </ul>
+      </div>
+
+      <div class="founder-block">
+        <h4>Selected research</h4>
+        <ul class="plain-list">
+          <li>Deep learning for food item detection and recognition — <em>Scientific Reports</em>, 2024</li>
+          <li>Systematic study of deep learning for plant disease detection — <em>Archives of Computational Methods in Engineering</em>, 2023</li>
+          <li>Explainable AI and NLP for mental health prediction, 2025</li>
+          <li>Systematic review of security in healthcare systems, 2025</li>
+        </ul>
+      </div>
+
+      <div class="founder-block">
+        <h4>Education &amp; certifications</h4>
+        <ul class="plain-list">
+          <li>Master of Computer Applications — IKG Punjab Technical University</li>
+          <li>Bachelor of Computer Applications — Panjab University</li>
+          <li>Diploma in Business Administration — RCB College, Calgary</li>
+          <li>AWS Certified Cloud Practitioner · IBM Tools for Data Science · UC Davis SQL for Data Science</li>
+        </ul>
+      </div>
       <div class="service-tags">
         <span class="service-tag">Applied ML</span>
         <span class="service-tag">LLMs &amp; NLP</span>
@@ -1430,10 +1716,51 @@ footer {
 
 <!-- CTA -->
 <section class="cta-section" id="contact">
-  <div class="cta-box animate-in">
-    <h2>Ready to <span class="gradient-text">shift your stack</span>?</h2>
-    <p>Book a free 30-minute discovery call. We'll assess your AI readiness and outline a transformation path — no obligations.</p>
-    <a href="mailto:hello@shiftstack.ca?subject=Discovery%20call%20request" class="btn-primary">Book Your Free Discovery Call →</a>
+  <div class="section-header">
+    <div class="section-tag">// Contact</div>
+    <h2 class="section-title">Ready to <span class="gradient-text">shift your stack</span>?</h2>
+    <p class="section-desc">Book a free 30-minute discovery call. We'll assess your AI readiness and outline a transformation path — no obligations.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info animate-in">
+      <a class="contact-row" href="mailto:hello@shiftstack.ca">
+        <span class="contact-icon">✉️</span>
+        <div><div class="contact-label">Email</div><div class="contact-value">hello@shiftstack.ca</div></div>
+      </a>
+      <a class="contact-row" href="tel:+18252887232">
+        <span class="contact-icon">📞</span>
+        <div><div class="contact-label">Phone</div><div class="contact-value">+1 (825) 288-7232</div></div>
+      </a>
+      <div class="contact-row">
+        <span class="contact-icon">📍</span>
+        <div><div class="contact-label">Location</div><div class="contact-value">Calgary, Alberta · serving clients across Canada</div></div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">🕘</span>
+        <div><div class="contact-label">Hours</div><div class="contact-value">Mon – Fri, 9:00 – 5:00 MT · replies within 1 business day</div></div>
+      </div>
+    </div>
+    <form class="contact-form animate-in" id="contact-form">
+      <div class="form-row">
+        <label>Name<input name="name" required autocomplete="name"></label>
+        <label>Work email<input name="email" type="email" required autocomplete="email"></label>
+      </div>
+      <div class="form-row">
+        <label>Organization<input name="org" autocomplete="organization"></label>
+        <label>Interested in
+          <select name="interest">
+            <option>AI Readiness Assessment</option>
+            <option>AI Pilot Sprint</option>
+            <option>AI Academy (workforce training)</option>
+            <option>End-to-End Transformation</option>
+            <option>Not sure yet</option>
+          </select>
+        </label>
+      </div>
+      <label>How can we help?<textarea name="message" rows="4" required></textarea></label>
+      <button type="submit" class="btn-primary">Send &amp; Book Discovery Call →</button>
+      <p class="form-note">This opens your email app with your message ready to send to hello@shiftstack.ca.</p>
+    </form>
   </div>
 </section>
 
@@ -1470,6 +1797,13 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+document.getElementById('contact-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const body = `Name: ${f.get('name')}\nEmail: ${f.get('email')}\nOrganization: ${f.get('org')}\nInterested in: ${f.get('interest')}\n\n${f.get('message')}`;
+  location.href = 'mailto:hello@shiftstack.ca?subject=' + encodeURIComponent('Discovery call — ' + (f.get('org') || f.get('name'))) + '&body=' + encodeURIComponent(body);
+});
 
 const nav = document.querySelector('nav');
 const menuBtn = document.querySelector('.mobile-menu-btn');
